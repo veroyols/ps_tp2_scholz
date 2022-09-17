@@ -17,7 +17,7 @@ namespace Domain.Entities
         public string Name { get; set; }//nvarchar(25)
         [MaxLength(25)]
         public string Lastname { get; set; }//nvarchar(25)
-        public string Address { get; set; } //nvarchar(max) = string
+        public string Address { get; set; } //nvarchar(max) 
         [MaxLength(13)] 
         public string Phone { get; set; }//nvarchar(13)
         

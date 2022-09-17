@@ -17,7 +17,7 @@ namespace Domain.Entities
         public string TradeMark { get; set; } //nvarchar(25)
         [MaxLength(25)]
         public string Code { get; set; } //nvarchar(25)
-        public decimal Price { get; set; } //.HasPrecision(15, 2);
+        public decimal Price { get; set; } //.HasColumnType("decimal(15, 2)");
         public string Image { get; set; } //nvarchar(max)
 
         //Relaciones
