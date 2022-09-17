@@ -10,15 +10,17 @@ using System.Threading.Tasks;
 namespace Infrastructure.Persistence
 {
     public class AppDbContext : DbContext
-    {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base() { }
+    { 
         //Declarar las entities
         public DbSet<Client> ClientDb { get; set; }
         public DbSet<Product> ProductDb { get; set; }
         public DbSet<Cart> CartDb { get; set; }
         public DbSet<Order> OrderDb { get; set; }
         public DbSet<CartProduct> CartProductDb { get; set; }
-
+        //constructor
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {}
+        //No sobreescribo el metodo porque lo INYECTO en Program
         //MODELADO -> FluentApi
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,23 +46,22 @@ namespace Infrastructure.Persistence
             {
                 entity.ToTable("Cart");
                 entity.HasKey(c => c.CartId); //key
-                entity.Property(c => c.CartId).HasColumnType("UUID");//?
                 //clientetoIdFK
                 entity
                     .HasOne<Client>(cart => cart.Client)
                     .WithMany(cli => cli.Carts)
-                    .HasForeignKey(cli => cli.ClientId);
+                    .HasForeignKey(cart => cart.ClientId);
             });
             //ORDER ok
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.ToTable("Order");
-                entity.HasKey(o => o.CartId); //key
+                entity.HasKey(o => o.OrderId); //key
                 entity.Property(o => o.Total).HasColumnType("decimal(15, 2)");
                 entity
                     .HasOne<Cart>(o => o.Cart)
                     .WithOne(cart => cart.Order)
-                    .HasForeignKey<Cart>(cart => cart.CartId); //FK
+                    .HasForeignKey<Cart>(cart => cart.CartId); //FK 
             });
             //CART/PRODUCT 
             modelBuilder.Entity<CartProduct>(entity =>

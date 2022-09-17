@@ -10,7 +10,7 @@ namespace Domain.Entities
     public class CartProduct
     {
         [Key]
-        public int CartId { get; set; } //UUID PK FK
+        public Guid CartId { get; set; } //UUID PK FK
         [Key]
         public int ProductId { get; set; } //PK FK
         public int Amount { get; set; } 
