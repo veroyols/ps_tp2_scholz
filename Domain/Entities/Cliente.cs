@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Client
+    public class Cliente
     {
         [Key]
-        public int ClientId { get; set; } //PK
+        public int ClienteId { get; set; } //PK
         [MaxLength(10)]
         public string DNI { get; set; }//nvarchar(10)
         [MaxLength(25)] 
-        public string Name { get; set; }//nvarchar(25)
+        public string Nombre { get; set; }//nvarchar(25)
         [MaxLength(25)]
-        public string Lastname { get; set; }//nvarchar(25)
-        public string Address { get; set; } //nvarchar(max) 
+        public string Apellido { get; set; }//nvarchar(25)
+        public string Direccion { get; set; } //nvarchar(max) 
         [MaxLength(13)] 
-        public string Phone { get; set; }//nvarchar(13)
+        public string Telefono { get; set; }//nvarchar(13)
         
         //Relacion
-        public IList<Cart> Carts { get; set; }
+        public IList<Carrito> Carritos { get; set; }
     }
 }

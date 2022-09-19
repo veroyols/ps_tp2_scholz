@@ -17,13 +17,12 @@ namespace ps_tp1_scholz.Controllers
         }
 
         [HttpPost] //crear
-        public IActionResult CreateClient()
+        public async Task<IActionResult> CreateClient()
         {
             //ACOPLADO
             //var services = new ClientServices();
-            var result = _services.CreateClient();
+            var result = await _services.CreateClient();
             return new JsonResult(result);
-        } 
-         
+        }
     }
 }

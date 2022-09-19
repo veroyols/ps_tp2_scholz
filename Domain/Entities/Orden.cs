@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Order
+    public class Orden
     {
         [Key]
-        public Guid OrderId { get; set; } //UUID PK
-        public Guid CartId { get; set; } //UUID FK
+        public Guid OrdenId { get; set; } //UUID PK
+        public Guid CarritoId { get; set; } //UUID FK
 
-        public DateTime Date { get; set; }
+        public DateTime Fecha { get; set; }
         public decimal Total { get; set; } //.HasPrecision(15, 2);
         
         //Relaciones
-        public Cart Cart { get; set; }
+        public Carrito Carrito { get; set; }
         
     }
 }

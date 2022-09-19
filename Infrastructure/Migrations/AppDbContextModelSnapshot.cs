@@ -22,114 +22,113 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Domain.Entities.Cart", b =>
+            modelBuilder.Entity("Domain.Entities.Carrito", b =>
                 {
-                    b.Property<Guid>("CartId")
+                    b.Property<Guid>("CarritoId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ClientId")
+                    b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Status")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
 
-                    b.HasKey("CartId");
+                    b.HasKey("CarritoId");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("ClienteId");
 
-                    b.ToTable("Cart", (string)null);
+                    b.ToTable("Carrito", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.CartProduct", b =>
+            modelBuilder.Entity("Domain.Entities.CarritoProducto", b =>
                 {
-                    b.Property<Guid>("CartId")
+                    b.Property<Guid>("CarritoId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("ProductoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Amount")
+                    b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.HasKey("CartId", "ProductId");
+                    b.HasKey("CarritoId", "ProductoId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductoId");
 
-                    b.ToTable("CartProduct", (string)null);
+                    b.ToTable("CarritoProducto", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Client", b =>
+            modelBuilder.Entity("Domain.Entities.Cliente", b =>
                 {
-                    b.Property<int>("ClientId")
+                    b.Property<int>("ClienteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClienteId"), 1L, 1);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("Apellido")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("DNI")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("Lastname")
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
-
-                    b.Property<string>("Phone")
+                    b.Property<string>("Telefono")
                         .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 
-                    b.HasKey("ClientId");
+                    b.HasKey("ClienteId");
 
-                    b.ToTable("Client", (string)null);
+                    b.ToTable("Cliente", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Order", b =>
+            modelBuilder.Entity("Domain.Entities.Orden", b =>
                 {
-                    b.Property<Guid>("OrderId")
+                    b.Property<Guid>("OrdenId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CartId")
+                    b.Property<Guid>("CarritoId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(15,2)");
 
-                    b.HasKey("OrderId");
+                    b.HasKey("OrdenId");
 
-                    b.ToTable("Order", (string)null);
+                    b.ToTable("Orden", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product", b =>
+            modelBuilder.Entity("Domain.Entities.Producto", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("ProductoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductoId"), 1L, 1);
 
-                    b.Property<string>("Code")
+                    b.Property<string>("Codigo")
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -137,80 +136,76 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(15,2)");
-
-                    b.Property<string>("TradeMark")
+                    b.Property<string>("Marca")
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
-                    b.HasKey("ProductId");
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Product", (string)null);
+                    b.Property<decimal>("Precio")
+                        .HasColumnType("decimal(15,2)");
+
+                    b.HasKey("ProductoId");
+
+                    b.ToTable("Producto", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Cart", b =>
+            modelBuilder.Entity("Domain.Entities.Carrito", b =>
                 {
-                    b.HasOne("Domain.Entities.Order", "Order")
-                        .WithOne("Cart")
-                        .HasForeignKey("Domain.Entities.Cart", "CartId")
+                    b.HasOne("Domain.Entities.Orden", "Orden")
+                        .WithOne("Carrito")
+                        .HasForeignKey("Domain.Entities.Carrito", "CarritoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Client", "Client")
-                        .WithMany("Carts")
-                        .HasForeignKey("ClientId")
+                    b.HasOne("Domain.Entities.Cliente", "Cliente")
+                        .WithMany("Carritos")
+                        .HasForeignKey("ClienteId");
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Orden");
+                });
+
+            modelBuilder.Entity("Domain.Entities.CarritoProducto", b =>
+                {
+                    b.HasOne("Domain.Entities.Carrito", "Carrito")
+                        .WithMany("CarritoProducto")
+                        .HasForeignKey("CarritoId");
+
+                    b.HasOne("Domain.Entities.Producto", "Producto")
+                        .WithMany("CarritoProducto")
+                        .HasForeignKey("ProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Client");
+                    b.Navigation("Carrito");
 
-                    b.Navigation("Order");
+                    b.Navigation("Producto");
                 });
 
-            modelBuilder.Entity("Domain.Entities.CartProduct", b =>
+            modelBuilder.Entity("Domain.Entities.Carrito", b =>
                 {
-                    b.HasOne("Domain.Entities.Cart", "Cart")
-                        .WithMany("CartProduct")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Product", "Product")
-                        .WithMany("CartProduct")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
-
-                    b.Navigation("Product");
+                    b.Navigation("CarritoProducto");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Cart", b =>
+            modelBuilder.Entity("Domain.Entities.Cliente", b =>
                 {
-                    b.Navigation("CartProduct");
+                    b.Navigation("Carritos");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Client", b =>
+            modelBuilder.Entity("Domain.Entities.Orden", b =>
                 {
-                    b.Navigation("Carts");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Order", b =>
-                {
-                    b.Navigation("Cart")
+                    b.Navigation("Carrito")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product", b =>
+            modelBuilder.Entity("Domain.Entities.Producto", b =>
                 {
-                    b.Navigation("CartProduct");
+                    b.Navigation("CarritoProducto");
                 });
 #pragma warning restore 612, 618
         }

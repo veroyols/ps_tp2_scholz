@@ -12,11 +12,11 @@ namespace Infrastructure.Persistence
     public class AppDbContext : DbContext
     { 
         //Declarar las entities
-        public DbSet<Client> ClientDb { get; set; }
-        public DbSet<Product> ProductDb { get; set; }
-        public DbSet<Cart> CartDb { get; set; }
-        public DbSet<Order> OrderDb { get; set; }
-        public DbSet<CartProduct> CartProductDb { get; set; }
+        public DbSet<Cliente> ClienteDb { get; set; }
+        public DbSet<Producto> ProductoDb { get; set; }
+        public DbSet<Carrito> CarritoDb { get; set; }
+        public DbSet<Orden> OrdenDb { get; set; }
+        public DbSet<CarritoProducto> CarritoProductoDb { get; set; }
         //constructor
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {}
@@ -24,60 +24,62 @@ namespace Infrastructure.Persistence
         //MODELADO -> FluentApi
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //CLIENT
-            modelBuilder.Entity<Client>(entity =>
+            //CLIENTE
+            modelBuilder.Entity<Cliente>(entity =>
             {
-                entity.ToTable("Client"); //nombre de la tabla
-                entity.HasKey(c => c.ClientId); //int key
-                entity.Property(c => c.ClientId).ValueGeneratedOnAdd(); //autoincremental
-                //RELACION: Cart
+                entity.ToTable("Cliente"); 
+                entity.HasKey(c => c.ClienteId);
+                entity.Property(c => c.ClienteId).ValueGeneratedOnAdd(); //autoincremental
+                //RELACION: Carrito
             });
-            //PRODUCT
-            modelBuilder.Entity<Product>(entity =>
+            //PRODUCTO
+            modelBuilder.Entity<Producto>(entity =>
             {
-                entity.ToTable("Product");
-                entity.HasKey(p => p.ProductId); //key
-                entity.Property(p => p.ProductId).ValueGeneratedOnAdd(); //autoincremental
-                entity.Property(p => p.Price).HasColumnType("decimal(15, 2)");
+                entity.ToTable("Producto");
+                entity.HasKey(p => p.ProductoId); 
+                entity.Property(p => p.ProductoId).ValueGeneratedOnAdd();
+                entity.Property(p => p.Precio).HasColumnType("decimal(15, 2)");
                 //RELACION: CartPRoduct
             });
-            //CART
-            modelBuilder.Entity<Cart>(entity =>
+            //CARRITO
+            modelBuilder.Entity<Carrito>(entity =>
             {
-                entity.ToTable("Cart");
-                entity.HasKey(c => c.CartId); //key
-                //clientetoIdFK
+                entity.ToTable("Carrito");
+                entity.HasKey(c => c.CarritoId); 
+                //clienteFK
                 entity
-                    .HasOne<Client>(cart => cart.Client)
-                    .WithMany(cli => cli.Carts)
-                    .HasForeignKey(cart => cart.ClientId);
+                    .HasOne<Cliente>(car => car.Cliente)
+                    .WithMany(cli => cli.Carritos)
+                    .HasForeignKey(car => car.ClienteId)
+                    .IsRequired(false); //?
             });
-            //ORDER ok
-            modelBuilder.Entity<Order>(entity =>
+            //ORDEN
+            modelBuilder.Entity<Orden>(entity =>
             {
-                entity.ToTable("Order");
-                entity.HasKey(o => o.OrderId); //key
+                entity.ToTable("Orden");
+                entity.HasKey(o => o.OrdenId); 
                 entity.Property(o => o.Total).HasColumnType("decimal(15, 2)");
                 entity
-                    .HasOne<Cart>(o => o.Cart)
-                    .WithOne(cart => cart.Order)
-                    .HasForeignKey<Cart>(cart => cart.CartId); //FK 
+                    .HasOne<Carrito>(o => o.Carrito)
+                    .WithOne(c => c.Orden)
+                    .HasForeignKey<Carrito>(c => c.CarritoId);  
             });
-            //CART/PRODUCT 
-            modelBuilder.Entity<CartProduct>(entity =>
+            //CARRITOPRODUCTO 
+            modelBuilder.Entity<CarritoProducto>(entity =>
             {
-                entity.ToTable("CartProduct");
-                entity.HasKey(cp => new { cp.CartId, cp.ProductId });//key
+                entity.ToTable("CarritoProducto");
+                entity.HasKey(cp => new { cp.CarritoId, cp.ProductoId });//key
 
                 entity
-                    .HasOne<Cart>(cp => cp.Cart)
-                    .WithMany(cp => cp.CartProduct)
-                    .HasForeignKey(cp => cp.CartId);
+                    .HasOne<Carrito>(cp => cp.Carrito)
+                    .WithMany(cp => cp.CarritoProducto)
+                    .HasForeignKey(cp => cp.CarritoId)
+                    .IsRequired(false); //?
 
                 entity
-                    .HasOne<Product>(cp => cp.Product)
-                    .WithMany(cp => cp.CartProduct)
-                    .HasForeignKey(cp => cp.ProductId);
+                    .HasOne<Producto>(cp => cp.Producto)
+                    .WithMany(cp => cp.CarritoProducto)
+                    .HasForeignKey(cp => cp.ProductoId);
             });
         }
     }

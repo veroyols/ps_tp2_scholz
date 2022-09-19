@@ -1,25 +1,37 @@
 using Application.Interfaces;
 using Application.UseCase.Client;
+using Application.UseCase.Order;
+using Application.UseCase.Product;
+using Infrastructure.cqrs_Command;
+using Infrastructure.cqrs_Query;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();//
+builder.Services.AddSwaggerGen();//
 
 // INYECCION POR DEPENDENCIAS
-builder.Services.AddTransient<IClientServices, ClientServices>(); 
+builder.Services.AddScoped<IClientServices, ClientServices>();
+builder.Services.AddScoped<IClientQuery, ClientQuery>();
+builder.Services.AddScoped<IClientCommand, ClientCommand>();
 
-//CONEXION A bd
+builder.Services.AddScoped<IProductServices, ProductServices>();
+builder.Services.AddScoped<IProductQuery, ProductQuery>();
+builder.Services.AddScoped<IProductCommand, ProductCommand>();
+
+builder.Services.AddScoped<IOrderServices, OrderServices>();
+builder.Services.AddScoped<IOrderQuery, OrderQuery>();
+builder.Services.AddScoped<IOrderCommand, OrderCommand>();
+
+//ConectionString
 var conectionString = builder.Configuration["ConectionString"];
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conectionString));
 
 var app = builder.Build();
-
 //Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -27,18 +39,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
 
-//Menu
+//CONSOLE
 bool m = true;
 do
 {
-    //Console.Clear();
+    Console.Clear();
     Console.WriteLine("MENU DE OPCIONES");
     Console.WriteLine("1. Opción 1");
     Console.WriteLine("4. Salir");
@@ -56,16 +65,14 @@ do
     }
     catch (OverflowException e)
     {
-        Console.Write(e.Message + " Press any key to continue . . . ");
+        Console.Write(e.Message + " \nPress any key to continue . . . ");
         Console.ReadKey(true);
     }
     catch (Exception e)
     {
-        Console.Write(e.Message + " Ingrese un numero. Press any key to continue . . . ");
+        Console.Write(e.Message + " \nPress any key to continue . . . ");
         Console.ReadKey(true);
     }
-    //catch: si esta vacio -> "No ha ingresado ningun numero."
-
 }
 while (m);
 
@@ -91,10 +98,7 @@ bool MenuPrincipal(int opt)
             Console.WriteLine("-------");
             return false;
         default:
-            Console.WriteLine("Debe ingresar un numero entre 1 y 3");
-            Console.Write("Press any key to continue . . . ");
-            Console.ReadKey(true);
-            return true;
+            throw new ArgumentOutOfRangeException();
     }
 }
 
@@ -127,3 +131,5 @@ static bool Menu1()
             return true;
     }
 }
+
+//fin menu
