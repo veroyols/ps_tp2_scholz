@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\repositorios\\ps_tp1_scholz\\Infrastructure\\Infrastructure.csproj": {}
+    "C:\\repositorios\\ps_tp2_scholz\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\repositorios\\ps_tp1_scholz\\Application\\Application.csproj": {
+    "C:\\repositorios\\ps_tp2_scholz\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repositorios\\ps_tp1_scholz\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\repositorios\\ps_tp2_scholz\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\repositorios\\ps_tp1_scholz\\Application\\Application.csproj",
+        "projectPath": "C:\\repositorios\\ps_tp2_scholz\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\veros\\.nuget\\packages\\",
-        "outputPath": "C:\\repositorios\\ps_tp1_scholz\\Application\\obj\\",
+        "outputPath": "C:\\repositorios\\ps_tp2_scholz\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\veros\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\repositorios\\ps_tp1_scholz\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\repositorios\\ps_tp1_scholz\\Domain\\Domain.csproj"
+              "C:\\repositorios\\ps_tp2_scholz\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\repositorios\\ps_tp2_scholz\\Domain\\Domain.csproj"
               }
             }
           }
@@ -63,14 +63,14 @@
         }
       }
     },
-    "C:\\repositorios\\ps_tp1_scholz\\Domain\\Domain.csproj": {
+    "C:\\repositorios\\ps_tp2_scholz\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repositorios\\ps_tp1_scholz\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\repositorios\\ps_tp2_scholz\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\repositorios\\ps_tp1_scholz\\Domain\\Domain.csproj",
+        "projectPath": "C:\\repositorios\\ps_tp2_scholz\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\veros\\.nuget\\packages\\",
-        "outputPath": "C:\\repositorios\\ps_tp1_scholz\\Domain\\obj\\",
+        "outputPath": "C:\\repositorios\\ps_tp2_scholz\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\veros\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -118,14 +118,14 @@
         }
       }
     },
-    "C:\\repositorios\\ps_tp1_scholz\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\repositorios\\ps_tp2_scholz\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repositorios\\ps_tp1_scholz\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\repositorios\\ps_tp2_scholz\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\repositorios\\ps_tp1_scholz\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\repositorios\\ps_tp2_scholz\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\veros\\.nuget\\packages\\",
-        "outputPath": "C:\\repositorios\\ps_tp1_scholz\\Infrastructure\\obj\\",
+        "outputPath": "C:\\repositorios\\ps_tp2_scholz\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\veros\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -142,8 +142,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\repositorios\\ps_tp1_scholz\\Application\\Application.csproj": {
-                "projectPath": "C:\\repositorios\\ps_tp1_scholz\\Application\\Application.csproj"
+              "C:\\repositorios\\ps_tp2_scholz\\Application\\Application.csproj": {
+                "projectPath": "C:\\repositorios\\ps_tp2_scholz\\Application\\Application.csproj"
               }
             }
           }

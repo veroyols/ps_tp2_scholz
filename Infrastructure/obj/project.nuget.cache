@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v39/SZBTmqrx8ZGPc5BZWb5/VKbO5Vnt44yv1b4BEJcQ1MaY7cVjz+8YwLII01UUfrrarAf68EoXMccq6htQ+g==",
+  "dgSpecHash": "+tukhwTJVv3JQ7/US176e+yv93udf7ovog6zfusi7PyzRrQog8na4VGKX8ZbouSkE7PddoWXbRKU3V9WBctp6Q==",
   "success": true,
-  "projectFilePath": "C:\\repositorios\\ps_tp1_scholz\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\repositorios\\ps_tp2_scholz\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\veros\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\veros\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

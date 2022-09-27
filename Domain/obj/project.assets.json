@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\repositorios\\ps_tp1_scholz\\Domain\\Domain.csproj",
+      "projectUniqueName": "C:\\repositorios\\ps_tp2_scholz\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "C:\\repositorios\\ps_tp1_scholz\\Domain\\Domain.csproj",
+      "projectPath": "C:\\repositorios\\ps_tp2_scholz\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\veros\\.nuget\\packages\\",
-      "outputPath": "C:\\repositorios\\ps_tp1_scholz\\Domain\\obj\\",
+      "outputPath": "C:\\repositorios\\ps_tp2_scholz\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\veros\\AppData\\Roaming\\NuGet\\NuGet.Config",

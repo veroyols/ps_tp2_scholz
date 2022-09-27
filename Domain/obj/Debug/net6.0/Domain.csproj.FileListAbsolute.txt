@@ -10,3 +10,15 @@ C:\repositorios\ps_tp1_scholz\Domain\obj\Debug\net6.0\Domain.dll
 C:\repositorios\ps_tp1_scholz\Domain\obj\Debug\net6.0\refint\Domain.dll
 C:\repositorios\ps_tp1_scholz\Domain\obj\Debug\net6.0\Domain.pdb
 C:\repositorios\ps_tp1_scholz\Domain\obj\Debug\net6.0\ref\Domain.dll
+C:\repositorios\ps_tp2_scholz\Domain\bin\Debug\net6.0\Domain.deps.json
+C:\repositorios\ps_tp2_scholz\Domain\bin\Debug\net6.0\Domain.dll
+C:\repositorios\ps_tp2_scholz\Domain\bin\Debug\net6.0\Domain.pdb
+C:\repositorios\ps_tp2_scholz\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+C:\repositorios\ps_tp2_scholz\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\repositorios\ps_tp2_scholz\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+C:\repositorios\ps_tp2_scholz\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+C:\repositorios\ps_tp2_scholz\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+C:\repositorios\ps_tp2_scholz\Domain\obj\Debug\net6.0\Domain.dll
+C:\repositorios\ps_tp2_scholz\Domain\obj\Debug\net6.0\refint\Domain.dll
+C:\repositorios\ps_tp2_scholz\Domain\obj\Debug\net6.0\Domain.pdb
+C:\repositorios\ps_tp2_scholz\Domain\obj\Debug\net6.0\ref\Domain.dll
