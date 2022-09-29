@@ -10,16 +10,16 @@ namespace Domain.Entities
     public class Cliente
     {
         [Key]
-        public int ClienteId { get; set; } //PK
+        public int ClienteId { get; set; }
         [MaxLength(10)]
-        public string DNI { get; set; }//nvarchar(10)
+        public string DNI { get; set; }
         [MaxLength(25)] 
-        public string Nombre { get; set; }//nvarchar(25)
+        public string Nombre { get; set; }
         [MaxLength(25)]
-        public string Apellido { get; set; }//nvarchar(25)
-        public string Direccion { get; set; } //nvarchar(max) 
+        public string Apellido { get; set; }
+        public string Direccion { get; set; }
         [MaxLength(13)] 
-        public string Telefono { get; set; }//nvarchar(13)
+        public string Telefono { get; set; }
         
         //Relacion
         public IList<Carrito> Carritos { get; set; }

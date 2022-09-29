@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    public interface IProductCommand
+    public interface ICartCommand
     {
+        public Task InsertCart(Carrito car);
     }
 }

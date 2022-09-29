@@ -10,6 +10,6 @@ namespace Application.Interfaces
     public interface IClientQuery
     {
         List<Cliente> GetListClient();
-        Cliente GetClient(int clientId);
+        public Task<Cliente> GetClient(int clientId);
     }
 }

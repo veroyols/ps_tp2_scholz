@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.cqrs_Command
 {
-    public class ClientCommand : IClientCommand
+    public class CartCommand : ICartCommand
     {
         private readonly AppDbContext _context;
 
-        public ClientCommand(AppDbContext context)
+        public CartCommand(AppDbContext context)
         {
             _context = context;
         }
-        //1
-        public async Task InsertClient(Cliente client)
+        //4
+        public async Task InsertCart(Carrito car)
         {
-            _context.Add(client);
-            await _context.SaveChangesAsync();  
-        } 
+            _context.Add(car);
+            await _context.SaveChangesAsync();
+        }
     }
 }

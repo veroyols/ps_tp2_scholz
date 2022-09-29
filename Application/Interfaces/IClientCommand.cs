@@ -9,7 +9,6 @@ namespace Application.Interfaces
 {
     public interface IClientCommand
     {
-        //op.1
         Task InsertClient(Cliente client);
     }
 }

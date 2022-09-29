@@ -1,4 +1,6 @@
 ﻿using Application.Interfaces;
+using Domain.Entities;
+using Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,32 +13,41 @@ namespace Application.UseCase.Client
     {
         private readonly IClientCommand _command;
         private readonly IClientQuery _query;
-
         public ClientServices(IClientCommand command, IClientQuery query)
         {
             _command = command;
             _query = query;
         }
-
-        //op.1
-        public Task<Domain.Entities.Cliente> CreateClient()
+        //1
+        public async Task<Cliente> CreateClient(CreateClientRequest request)
+        {
+            //mapear request -> Cliente
+            var cliente = new Cliente
+            {
+                DNI = request.dni,
+                Nombre = request.name,
+                Apellido = request.lastname,
+                Direccion = request.address,
+                Telefono = request.phoneNumber
+            };
+            await _command.InsertClient(cliente);
+            return cliente;
+        }
+        public async Task<Cliente> GetClient(int clientId)
+        {
+            var c = await Task.Run (() => _query.GetClient(clientId));
+            return c;
+        }
+        public async Task<List<Cliente>> GetClients()
+        {
+            var list = await Task.Run(() => _query.GetListClient());// error await
+            return list;
+        }
+        public Task<Cliente> DeleteClient(int clientId)
         {
             throw new NotImplementedException();
         }
-
-        public Task<Domain.Entities.Cliente> DeleteClient(int clientId)
-        {
-            throw new NotImplementedException();
-        }
-        public Task<Domain.Entities.Cliente> GetClient(int clientId)
-        {
-            throw new NotImplementedException();
-        }
-        public Task<List<Domain.Entities.Cliente>> GetClients()
-        {
-            throw new NotImplementedException();
-        }
-        public Task<Domain.Entities.Cliente> UpdateClient(int clientId)
+        public Task<Cliente> UpdateClient(int clientId)
         {
             throw new NotImplementedException();
         }

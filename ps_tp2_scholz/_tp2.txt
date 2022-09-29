@@ -1,1 +1,49 @@
-﻿
+﻿ (TP 2) Entrega de Backend con la lógica de negocios
+1.Registrar a los clientes. //[POST]
+	EndPoint >/api/clientes
+	BODY
+	{
+		"dni": "123456789",
+		"name": "Señor",
+		"lastname": "X",
+		"address": "Calle falsa 123",
+		"phoneNumber": "123456789"
+	}
+2.Ver todos los productos y realizar búsquedas por filtrado de nombre y ordenamiento por precio.
+	EndPoint >/api/productos
+	QueryParams
+	{
+		name : EJ. Mochila
+		sort : EJ. true (ASC = true | DESC = false)
+	}
+3.Debe permitir ver el detalle de un producto.
+	EndPoint [GET]>/api/productos/:id
+4. Debe permitir agregar un producto al carrito de compra.
+	EndPoint >/api/carrito
+	Body
+	{
+		"clientId": 123,
+		"productId": 123,
+		"amount": 123
+	}
+5. Debe permitir modificar el carrito de compra.
+	EndPoint >/api/carrito
+	Body
+	{
+		"clientId": 123,
+		"productId": 123,
+		"amount": 123
+	}
+6. Debe permitir eliminar un producto del carrito.
+	EndPoint [DELETE] >/api/carrito/:clientId/:productId
+7. Debe permitir efectuar una compra.
+	EndPoint [POST] >/api/orden/:clientId
+8. Agregar un reporte de balance por día, debe devolver la recaudación del día con las
+ventas realizadas y sus respectivos productos.
+	EndPoint [GET] >/api/orden
+	QueryParams
+	{
+		from: 2022-09-19 (Fecha desde)
+		to: 2022-09-20 (Fecha hasta)
+	}
+	https://developer.mozilla.org/es/docs/Web/HTTP/Status#respuestas_satisfactorias

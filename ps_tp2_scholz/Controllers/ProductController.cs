@@ -9,18 +9,22 @@ namespace ps_tp2_scholz.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductServices _services; //se inyecta un cliente para evitar que lo cree el metodo
-        //CONSTRUCTOR
-        public ProductController(IProductServices services) //
+        private readonly IProductServices _services;
+        public ProductController(IProductServices services)
         {
             _services = services;
         }
-
-        [HttpGet] 
-        public async Task<IActionResult> GetProduct(int productId)
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
-            var result = await _services.GetProduct(productId);
-            return new JsonResult(result);
+            var result = await _services.GetProducts();
+            return new JsonResult(result) { StatusCode = 200 };
+        }
+        [HttpGet("{id}")] //endpoint 3
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            var result = await _services.GetProduct(id);
+            return new JsonResult(result) { StatusCode = 200 };
         }
     }
 }
