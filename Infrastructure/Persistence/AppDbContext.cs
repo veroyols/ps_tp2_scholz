@@ -164,7 +164,7 @@ namespace Infrastructure.Persistence
                         Precio = 5200.00M,
                         Image = "camiseta.png"
                     });
-                //RELACION: CartPRoduct
+                //RELACION: CartPRoduct?
             });
 
             //ORDEN
@@ -205,8 +205,6 @@ namespace Infrastructure.Persistence
                     .HasOne<Carrito>(cp => cp.Carrito)
                     .WithMany(c => c.CarritoProducto)
                     .HasForeignKey(cp => cp.CarritoId);
-                //.IsRequired(false); //?
-
                 entity
                     .HasOne<Producto>(cp => cp.Producto)
                     .WithMany(p => p.CarritoProducto)

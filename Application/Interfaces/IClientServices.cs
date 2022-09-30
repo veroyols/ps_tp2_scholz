@@ -11,7 +11,7 @@ namespace Application.Interfaces
     public interface IClientServices
     {
         //Endpoint 1
-        Task<Cliente> CreateClient(CreateClientRequest request);
+        Task<CreateClientRequest> CreateClient(CreateClientRequest request);
         Task<Cliente> UpdateClient(int clientId);
         Task<List<Cliente>> GetClients();
         Task<Cliente> DeleteClient(int clientId);

@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Application.Models;
 using Domain.Entities;
+using Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,20 +19,42 @@ namespace Application.UseCase.CartProduct
             _command = command;
             _query = query;
         }
-        public async Task<Carrito> CreateCart(CreateCartRequest request)
+        public async Task<CreateCartRequest> AddProductCart(CreateCartRequest request)
         {
-            //mapear request -> CP
-            var c = new Carrito
+            //"clientId": 123, c
+            //"productId": 123, cp
+            //"amount": 123 cp
+            var c = await _query.GetCarritoByClienteId(request.ClienteId);
+            if (c == null)
             {
-            ClienteId = request.ClienteId,
-            
-                //"clientId": 123,
-		        //"productId": 123,
-		        //"amount": 123
-            };
-            await _command.InsertCart(c);
-            return c;
-        }
+                c = new Carrito
+                {
+                    CarritoId = Guid.NewGuid(),
+                    ClienteId = request.ClienteId,
+                    Estado = true
+                };
+                await _command.InsertCart(c);
+            }
 
+            var cp = new CarritoProducto
+            {
+                CarritoId = c.CarritoId,
+                ProductoId = request.ProductoId,
+                Cantidad = request.Cantidad
+            };
+
+            //if Exists(cp)
+            //Cantidad++
+
+            await _command.AddProductCart(cp);
+
+            var r = new CreateCartRequest
+            {
+                ClienteId = c.ClienteId,
+                ProductoId = cp.ProductoId,
+                Cantidad = cp.Cantidad
+            };
+            return r;
+        }
     }
 }

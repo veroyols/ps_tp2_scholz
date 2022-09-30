@@ -9,10 +9,10 @@ namespace ps_tp2_scholz.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientController : ControllerBase
+    public class clienteController : ControllerBase
     {
         private readonly IClientServices _services; 
-        public ClientController(IClientServices services) 
+        public clienteController(IClientServices services) 
         {
             _services = services;
         }
@@ -35,6 +35,5 @@ namespace ps_tp2_scholz.Controllers
             var result = await _services.GetClient(id);
             return new JsonResult(result) { StatusCode = 200 };
         }
-
     }
 }

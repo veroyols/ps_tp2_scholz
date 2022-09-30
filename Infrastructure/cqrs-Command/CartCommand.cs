@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
 using Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,20 @@ namespace Infrastructure.cqrs_Command
         {
             _context = context;
         }
-        //4
-        public async Task InsertCart(Carrito car)
+
+        public async Task InsertCart(Carrito c)
         {
-            _context.Add(car);
+            _context.CarritoDb.Add(c);
             await _context.SaveChangesAsync();
+            return;
+        }
+
+        //4 ?
+        public async Task AddProductCart(CarritoProducto cp)
+        {
+            _context.CarritoProductoDb.Add(cp);
+            await _context.SaveChangesAsync();
+            return;
         }
     }
 }

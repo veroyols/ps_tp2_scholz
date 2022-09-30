@@ -19,7 +19,7 @@ namespace Application.UseCase.Client
             _query = query;
         }
         //1
-        public async Task<Cliente> CreateClient(CreateClientRequest request)
+        public async Task<CreateClientRequest> CreateClient(CreateClientRequest request)
         {
             //mapear request -> Cliente
             var cliente = new Cliente
@@ -31,7 +31,15 @@ namespace Application.UseCase.Client
                 Telefono = request.phoneNumber
             };
             await _command.InsertClient(cliente);
-            return cliente;
+            var r = new CreateClientRequest
+            {
+                dni = cliente.DNI,
+                name = cliente.Nombre,
+                lastname = cliente.Apellido,
+                address = cliente.Direccion,
+                phoneNumber = cliente.Telefono
+            };
+            return r;
         }
         public async Task<Cliente> GetClient(int clientId)
         {

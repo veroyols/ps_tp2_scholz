@@ -11,6 +11,6 @@ namespace Application.Interfaces
     public interface ICartServices
     {
         //Endpoint 4
-        Task<Carrito> CreateCart(CreateCartRequest request);
+        public Task<CreateCartRequest> AddProductCart(CreateCartRequest request);
     }
 }

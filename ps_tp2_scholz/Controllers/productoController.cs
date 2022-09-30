@@ -7,10 +7,10 @@ namespace ps_tp2_scholz.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class productoController : ControllerBase
     {
         private readonly IProductServices _services;
-        public ProductController(IProductServices services)
+        public productoController(IProductServices services)
         {
             _services = services;
         }

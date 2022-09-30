@@ -1,14 +1,10 @@
 ﻿ (TP 2) Entrega de Backend con la lógica de negocios
-1.Registrar a los clientes. //[POST]
-	EndPoint >/api/clientes
-	BODY
-	{
-		"dni": "123456789",
-		"name": "Señor",
-		"lastname": "X",
-		"address": "Calle falsa 123",
-		"phoneNumber": "123456789"
-	}
+1.[POST]>/api/clientes [OK]
+2.[GET]>/api/productos [FALTA FILTRAR POR NOMBRE Y ORDENAR POR PRECIO]
+3.[GET]>/api/productos/:id [OK]
+4.[POST]>/api/carrito [VER PK COMPUESTA - cantidad++]
+
+
 2.Ver todos los productos y realizar búsquedas por filtrado de nombre y ordenamiento por precio.
 	EndPoint >/api/productos
 	QueryParams
@@ -16,9 +12,8 @@
 		name : EJ. Mochila
 		sort : EJ. true (ASC = true | DESC = false)
 	}
-3.Debe permitir ver el detalle de un producto.
-	EndPoint [GET]>/api/productos/:id
-4. Debe permitir agregar un producto al carrito de compra.
+
+4. Agregar un producto al carrito de compra.
 	EndPoint >/api/carrito
 	Body
 	{
