@@ -1,11 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
 using Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.cqrs_Command
 {
@@ -17,7 +12,8 @@ namespace Infrastructure.cqrs_Command
         {
             _context = context;
         }
-        //1
+        
+        //1.
         public async Task InsertClient(Cliente client)
         {
             _context.Add(client);

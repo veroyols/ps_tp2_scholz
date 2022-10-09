@@ -1,12 +1,7 @@
 ﻿using Application.Interfaces;
 using Application.Models;
 using Domain.Entities;
-using Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
 
 namespace Application.UseCase.CartProduct
 {
@@ -14,47 +9,44 @@ namespace Application.UseCase.CartProduct
     {
         private readonly ICartCommand _command;
         private readonly ICartQuery _query;
+
         public CartServices(ICartCommand command, ICartQuery query)
         {
             _command = command;
             _query = query;
         }
-        public async Task<CreateCartRequest> AddProductCart(CreateCartRequest request)
+
+        public async Task<Carrito> ValidarCarrito(CreateCartRequest req)
         {
-            //"clientId": 123, c
-            //"productId": 123, cp
-            //"amount": 123 cp
-            var c = await _query.GetCarritoByClienteId(request.ClienteId);
-            if (c == null)
+            var cart = await _query.GetCarritoByClienteId(req.ClienteId);
+            if (cart == null)
             {
-                c = new Carrito
+                cart = new Carrito
                 {
                     CarritoId = Guid.NewGuid(),
-                    ClienteId = request.ClienteId,
+                    ClienteId = req.ClienteId,
                     Estado = true
                 };
-                await _command.InsertCart(c);
+                await _command.InsertCart(cart);
             }
+            return cart;
+        }
 
-            var cp = new CarritoProducto
-            {
-                CarritoId = c.CarritoId,
-                ProductoId = request.ProductoId,
-                Cantidad = request.Cantidad
-            };
+        public async Task<Carrito> GetCart(int cartId)
+        {
+            var c = await Task.Run(() => _query.GetCart(cartId));
+            return c;
+        }
 
-            //if Exists(cp)
-            //Cantidad++
+        public async Task<List<Carrito>> GetCarts()
+        {
+            var list = await Task.Run(() => _query.GetListCart());
+            return list;
+        }
 
-            await _command.AddProductCart(cp);
-
-            var r = new CreateCartRequest
-            {
-                ClienteId = c.ClienteId,
-                ProductoId = cp.ProductoId,
-                Cantidad = cp.Cantidad
-            };
-            return r;
+        public async Task StatusFalse(Guid cartId)
+        {
+            await Task.FromResult(_command.StatusFalse(cartId));
         }
     }
 }

@@ -2,11 +2,6 @@
 using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.cqrs_Query
 {
@@ -19,6 +14,16 @@ namespace Infrastructure.cqrs_Query
             _context = context;
         }
 
+        public async Task<Carrito> GetCart(int clientId)
+        {
+            var c = await _context.CarritoDb.FirstOrDefaultAsync(cli => cli.ClienteId == clientId);
+            return c;
+        }
+        public List<Carrito> GetListCart()
+        {
+            var list = _context.CarritoDb.ToList<Carrito>();
+            return list;
+        }
         public async Task<Carrito> GetCarritoByClienteId(int clientId)
         {
             var cart = await _context.CarritoDb

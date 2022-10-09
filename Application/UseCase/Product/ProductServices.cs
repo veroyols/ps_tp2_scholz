@@ -1,10 +1,6 @@
 ﻿using Application.Interfaces;
+using Application.Models;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.UseCase.Product
 {
@@ -18,29 +14,25 @@ namespace Application.UseCase.Product
             _command = command;
             _query = query;
         }
+
         //2.
-        public async Task<List<Producto>> GetProducts()
+        public async Task<List<Producto>> FilterProduct(FilterProductRequest filtrar)
         {
-            var list = await Task.Run(() => _query.GetListProduct());// error await
+            var list = await Task.Run(() => _query.GetListProduct(filtrar));
             return list;
         }
+
         //3.
         public async Task<Producto> GetProduct(int productId)
         {
             var p = await Task.Run(() => _query.GetProduct(productId));
             return p;
         }
-        public Task<Producto> CreateProduct()
+        
+        public async Task<List<Producto>> GetProducts()
         {
-            throw new NotImplementedException();
-        }
-        public Task<Producto> DeleteProduct(int productId)
-        {
-            throw new NotImplementedException();
-        }
-        public Task<Producto> UpdateProduct(int productId)
-        {
-            throw new NotImplementedException();
+            var list = await Task.Run(() => _query.GetListProduct());
+            return list;
         }
     }
 }

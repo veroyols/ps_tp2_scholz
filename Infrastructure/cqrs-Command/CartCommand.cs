@@ -1,12 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
 using Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.cqrs_Command
 {
@@ -26,12 +20,13 @@ namespace Infrastructure.cqrs_Command
             return;
         }
 
-        //4 ?
-        public async Task AddProductCart(CarritoProducto cp)
+        public async Task StatusFalse(Guid cartId)
         {
-            _context.CarritoProductoDb.Add(cp);
-            await _context.SaveChangesAsync();
-            return;
+            var c = _context.CarritoDb.FirstOrDefault(x => x.CarritoId == cartId);
+            if (c != null)
+            {
+                await Task.FromResult(c.Estado = false);
+            }
         }
     }
 }

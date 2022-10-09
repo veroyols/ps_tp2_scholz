@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces;
-using Application.UseCase.Product;
-using Microsoft.AspNetCore.Http;
+using Application.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ps_tp2_scholz.Controllers
@@ -14,17 +13,27 @@ namespace ps_tp2_scholz.Controllers
         {
             _services = services;
         }
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+
+        [HttpPost] //2.
+        public async Task<IActionResult> FilterProduct(FilterProductRequest filter)
         {
-            var result = await _services.GetProducts();
-            return new JsonResult(result) { StatusCode = 200 };
+            var result = await _services.FilterProduct(filter);
+            if (result == null)
+            {
+                return new JsonResult(result) { StatusCode = 204 }; //TODO: 400(Peticion Incorrecta)?
+            }
+            return new JsonResult(result) {StatusCode = 206}; //TODO: 206(Contenido Parcial)? 
         }
-        [HttpGet("{id}")] //endpoint 3
+
+        [HttpGet("{id}")] //3.
         public async Task<IActionResult> GetProductById(int id)
         {
             var result = await _services.GetProduct(id);
-            return new JsonResult(result) { StatusCode = 200 };
+            if (result == null)
+            {
+                return new JsonResult(result) {StatusCode = 204}; //TODO: 400(Peticion Incorrecta)?
+            }
+            return new JsonResult(result) {StatusCode = 200}; 
         }
     }
 }

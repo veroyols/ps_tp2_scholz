@@ -1,9 +1,5 @@
-﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Models;
+using Domain.Entities;
 
 namespace Application.Interfaces
 {
@@ -11,5 +7,8 @@ namespace Application.Interfaces
     {
         public Task<List<Producto>> GetListProduct();
         public Task<Producto> GetProduct(int productId);
+        //public Task<List<Producto>> GetListProduct(bool b, string prod);
+        public Task<List<Producto>> GetListProduct(FilterProductRequest filter);
+
     }
 }

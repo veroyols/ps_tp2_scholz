@@ -1,12 +1,7 @@
 ﻿using Application.Interfaces;
+using Application.Models;
 using Domain.Entities;
 using Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Infrastructure.cqrs_Query
 {
@@ -18,17 +13,38 @@ namespace Infrastructure.cqrs_Query
         {
             _context = context;
         }
-        //2
-        public async Task<List<Producto>> GetListProduct()
+
+        //2.
+        public async Task<List<Producto>> GetListProduct(FilterProductRequest filter)
         {
-            var list = await Task.Run(() => _context.ProductoDb.ToList<Producto>());// error await
-            return list;
+            if (filter.orderBy) //TODO
+            {
+                var q1 = await Task.Run(() =>
+                    from p in _context.Set<Producto>()
+                    where p.Nombre == filter.productName
+                    orderby p.Precio ascending
+                    select p);
+                return q1.ToList();
+            }
+            var query = await Task.Run(() =>
+                from p in _context.Set<Producto>()
+                where p.Nombre == filter.productName
+                orderby p.Precio descending
+                select p);
+            return query.ToList();
         }
-        //.3
+
+        //3.
         public async Task<Producto> GetProduct(int productId)
         {
             var p = await _context.ProductoDb.FindAsync(productId);
             return p;
+        }
+
+        public async Task<List<Producto>> GetListProduct()
+        {
+            var list = await Task.Run(() => _context.ProductoDb.ToList<Producto>());
+            return list;
         }
     }
 }

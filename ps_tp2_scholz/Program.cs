@@ -1,4 +1,5 @@
 using Application.Interfaces;
+using Application.UseCase;
 using Application.UseCase.CartProduct;
 using Application.UseCase.Client;
 using Application.UseCase.Order;
@@ -31,6 +32,10 @@ builder.Services.AddScoped<IOrderCommand, OrderCommand>();
 builder.Services.AddScoped<ICartServices, CartServices>();
 builder.Services.AddScoped<ICartQuery, CartQuery>();
 builder.Services.AddScoped<ICartCommand, CartCommand>();
+
+builder.Services.AddScoped<ICartProductServices, CartProducServices>();
+builder.Services.AddScoped<ICartProductCommand, CartProductCommand>();
+builder.Services.AddScoped<ICartProductQuery, CartProductQuery>();
 
 //ConectionString
 var conectionString = builder.Configuration["ConectionString"];

@@ -1,11 +1,5 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence
 {
@@ -19,12 +13,6 @@ namespace Infrastructure.Persistence
         public DbSet<CarritoProducto> CarritoProductoDb { get; set; }
         //constructor
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
-        //bd - se INYECTO en Program
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=VeronicaScholz;Trusted_Connection=True;");
-        //}
 
         //MODELADO -> FluentApi
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -55,16 +43,16 @@ namespace Infrastructure.Persistence
                 entity.Property(p => p.ProductoId).ValueGeneratedOnAdd();
                 entity.Property(p => p.Precio).HasColumnType("decimal(15, 2)");
                 entity.HasData(
-                    new Producto
-                    {
-                        ProductoId = 1,
-                        Nombre = "Remera",
-                        Descripcion = "Remera de algodon lisa, varios colores.",
-                        Marca = "Simpl",
-                        Codigo = "ps2c2022-01",
-                        Precio = 3000.00M,
-                        Image = "remera.png"
-                    });
+                                    new Producto
+                                    {
+                                        ProductoId = 1,
+                                        Nombre = "Remera",
+                                        Descripcion = "Remera de algodon lisa, varios colores.",
+                                        Marca = "Simpl",
+                                        Codigo = "ps2c2022-01",
+                                        Precio = 3000.00M,
+                                        Image = "https://drive.google.com/file/d/1AWEbI7NFytjQr0PcRNfqGjlWLDcW1BDr/view?usp=sharing"
+                                    });
                 entity.HasData(
                     new Producto
                     {
@@ -74,7 +62,7 @@ namespace Infrastructure.Persistence
                         Marca = "Simpl",
                         Codigo = "ps2c2022-02",
                         Precio = 4000.00M,
-                        Image = "buzo.png"
+                        Image = "https://drive.google.com/file/d/136zDTZUkUbs5Z4eoumK-Gm5J-Ex7aN2y/view?usp=sharing"
                     });
                 entity.HasData(
                     new Producto
@@ -85,7 +73,7 @@ namespace Infrastructure.Persistence
                         Marca = "Simpl",
                         Codigo = "ps2c2022-03",
                         Precio = 4500.00M,
-                        Image = "canguro.png"
+                        Image = "https://drive.google.com/file/d/1OoBv1FyptSBujAqBvTV61F3zkm6GLeb6/view?usp=sharing"
                     });
                 entity.HasData(
                     new Producto
@@ -96,7 +84,7 @@ namespace Infrastructure.Persistence
                         Marca = "Simpl",
                         Codigo = "ps2c2022-04",
                         Precio = 5000.00M,
-                        Image = "campera.png"
+                        Image = "https://drive.google.com/file/d/1zomCjyxcP1uyJxRonUVcAtDKC-y8LHmD/view?usp=sharing"
                     });
                 entity.HasData(
                     new Producto
@@ -107,7 +95,7 @@ namespace Infrastructure.Persistence
                         Marca = "Simpl",
                         Codigo = "ps2c2022-05",
                         Precio = 2700.00M,
-                        Image = "musculosa.png"
+                        Image = "https://drive.google.com/file/d/1DGa8_Ows-LfNxczRkvcBrQwX5lsh89_n/view?usp=sharing"
                     });
                 entity.HasData(
                     new Producto
@@ -118,7 +106,7 @@ namespace Infrastructure.Persistence
                         Marca = "Simpl",
                         Codigo = "ps2c2022-06",
                         Precio = 4700.00M,
-                        Image = "jogging.png"
+                        Image = "https://drive.google.com/file/d/12P_zAj696O3cYBeWToXWM93nQEgIFlW0/view?usp=sharing"
                     });
                 entity.HasData(
                     new Producto
@@ -129,7 +117,7 @@ namespace Infrastructure.Persistence
                         Marca = "Simpl",
                         Codigo = "ps2c2022-07",
                         Precio = 4900.00M,
-                        Image = "campera.png"
+                        Image = "https://drive.google.com/file/d/11-i6M5B8fZySpeS2XjaaEioi3Puq2DCS/view?usp=sharing"
                     });
                 entity.HasData(
                     new Producto
@@ -140,7 +128,7 @@ namespace Infrastructure.Persistence
                         Marca = "Simpl",
                         Codigo = "ps2c2022-08",
                         Precio = 6300.00M,
-                        Image = "jean.png"
+                        Image = "https://drive.google.com/file/d/1Vo-6YDNc4hoce7NkVrYVe3YQrf97QnG3/view?usp=sharing"
                     });
                 entity.HasData(
                     new Producto
@@ -151,7 +139,7 @@ namespace Infrastructure.Persistence
                         Marca = "Simpl",
                         Codigo = "ps2c2022-09",
                         Precio = 5100.00M,
-                        Image = "bremer.png"
+                        Image = "https://drive.google.com/file/d/16kEM1AO29k__3ayUe8zbe2DqodGbUzZ_/view?usp=sharing"
                     });
                 entity.HasData(
                     new Producto
@@ -162,7 +150,7 @@ namespace Infrastructure.Persistence
                         Marca = "Simpl",
                         Codigo = "ps2c2022-10",
                         Precio = 5200.00M,
-                        Image = "camiseta.png"
+                        Image = "https://drive.google.com/file/d/1udHiMsJF53vY67yJYEh9TRHon7e0w8vC/view?usp=sharing"
                     });
                 //RELACION: CartPRoduct?
             });
@@ -173,10 +161,6 @@ namespace Infrastructure.Persistence
                 entity.ToTable("Orden");
                 entity.HasKey(o => o.OrdenId);
                 entity.Property(o => o.Total).HasColumnType("decimal(15, 2)");
-                //entity
-                //.HasOne<Carrito>(o => o.Carrito)
-                //.WithOne(c => c.Orden)
-                //.HasForeignKey<Carrito>(c => c.CarritoId);
             });
 
             //CARRITO

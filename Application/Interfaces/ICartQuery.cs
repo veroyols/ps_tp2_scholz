@@ -1,15 +1,12 @@
 ﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
     public interface ICartQuery
     {
         public Task<Carrito> GetCarritoByClienteId(int clientId);
+        public List<Carrito> GetListCart();
+        public Task<Carrito> GetCart(int cartId);
 
     }
 }

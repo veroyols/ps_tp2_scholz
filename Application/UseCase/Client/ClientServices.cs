@@ -1,11 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
 using Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.UseCase.Client
 {
@@ -18,11 +13,11 @@ namespace Application.UseCase.Client
             _command = command;
             _query = query;
         }
-        //1
-        public async Task<CreateClientRequest> CreateClient(CreateClientRequest request)
+        
+        //1.
+        public async Task<CreateClientResponse> CreateClient(CreateClientRequest request)
         {
-            //mapear request -> Cliente
-            var cliente = new Cliente
+            var cliente = new Cliente //TODO Comprobar que no exista en la bd
             {
                 DNI = request.dni,
                 Nombre = request.name,
@@ -31,33 +26,23 @@ namespace Application.UseCase.Client
                 Telefono = request.phoneNumber
             };
             await _command.InsertClient(cliente);
-            var r = new CreateClientRequest
+            var r = new CreateClientResponse
             {
-                dni = cliente.DNI,
-                name = cliente.Nombre,
-                lastname = cliente.Apellido,
-                address = cliente.Direccion,
-                phoneNumber = cliente.Telefono
+                id = cliente.ClienteId
             };
             return r;
         }
+
         public async Task<Cliente> GetClient(int clientId)
         {
             var c = await Task.Run (() => _query.GetClient(clientId));
             return c;
         }
+
         public async Task<List<Cliente>> GetClients()
         {
-            var list = await Task.Run(() => _query.GetListClient());// error await
+            var list = await Task.Run(() => _query.GetListClient());
             return list;
-        }
-        public Task<Cliente> DeleteClient(int clientId)
-        {
-            throw new NotImplementedException();
-        }
-        public Task<Cliente> UpdateClient(int clientId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

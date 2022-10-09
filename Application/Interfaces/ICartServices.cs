@@ -1,16 +1,13 @@
 ﻿using Application.Models;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
     public interface ICartServices
     {
-        //Endpoint 4
-        public Task<CreateCartRequest> AddProductCart(CreateCartRequest request);
+        public Task<Carrito> ValidarCarrito(CreateCartRequest req);
+        public Task<List<Carrito>> GetCarts();
+        public Task<Carrito> GetCart(int clientId);
+        public Task StatusFalse(Guid cartId);
     }
 }

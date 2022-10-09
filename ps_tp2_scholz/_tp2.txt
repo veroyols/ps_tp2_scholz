@@ -1,26 +1,16 @@
 ﻿ (TP 2) Entrega de Backend con la lógica de negocios
 1.[POST]>/api/clientes [OK]
-2.[GET]>/api/productos [FALTA FILTRAR POR NOMBRE Y ORDENAR POR PRECIO]
+2.[OPTIONS]>/api/productos [ORDENAR ASC/DESC CON IF - VER METODOS] [OK]
 3.[GET]>/api/productos/:id [OK]
-4.[POST]>/api/carrito [VER PK COMPUESTA - cantidad++]
+4.[POST]>/api/carrito [VER PK COMPUESTA - cantidad++] ERROR SI LO EJECUTO DOS VECES
 
+	SELECT [ ALL / DISTINC ] [ * ] / [ListaColumnas_Expresiones] AS [Expresion]
+	FROM Nombre_Tabla_Vista 
+	WHERE Condiciones
+	ORDER BY ListaColumnas [ ASC / DESC ]
 
-2.Ver todos los productos y realizar búsquedas por filtrado de nombre y ordenamiento por precio.
-	EndPoint >/api/productos
-	QueryParams
-	{
-		name : EJ. Mochila
-		sort : EJ. true (ASC = true | DESC = false)
-	}
-
-4. Agregar un producto al carrito de compra.
-	EndPoint >/api/carrito
-	Body
-	{
-		"clientId": 123,
-		"productId": 123,
-		"amount": 123
-	}
+4. Da error si lo ejecuto dos veces, ver PK compuesta y sumar cantidad de productos si ya existe.
+	
 5. Debe permitir modificar el carrito de compra.
 	EndPoint >/api/carrito
 	Body
