@@ -2,6 +2,7 @@
 using Application.Models;
 using Domain.Entities;
 using Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.cqrs_Command
 {
@@ -14,29 +15,33 @@ namespace Infrastructure.cqrs_Command
             _context = context;
         }
 
-        //4. TODO
-        public async Task AddProductCart(CarritoProducto cp)
+        public async Task AddAmount(CarritoProducto cp, int cdad)
         {
-            _context.CarritoProductoDb.Add(cp);
+            var up = _context.CarritoProductoDb.First(c => c.CarritoId == cp.CarritoId && c.ProductoId == cp.ProductoId);
+            up.Cantidad += cdad;
+            await _context.SaveChangesAsync();
+        }
+
+        //4.
+        public async Task InsertCP(CarritoProducto cartProduct)
+        {
+            _context.CarritoProductoDb.Add(cartProduct);
             await _context.SaveChangesAsync();
         }
 
         //5. TODO
-        public Task UpdateCart(CreateCartRequest cart)
+        public async Task ChangeAmount(CarritoProducto cartProduct, int cdad)
         {
-            throw new NotImplementedException();
+            var up = _context.CarritoProductoDb.First(c => c.CarritoId == cartProduct.CarritoId && c.ProductoId == cartProduct.ProductoId);
+            up.Cantidad = cdad;
+            await _context.SaveChangesAsync();
         }
 
         //6. TODO
-        public async Task DeleteProduct(int clientId, int productId)
-        {
-            var cart = _context.CarritoDb.FirstOrDefault(x => x.ClienteId == clientId && x.Estado);
-            var cp = _context.CarritoProductoDb
-                .FirstOrDefault(x =>
-                    x.CarritoId == cart.CarritoId &&
-                    x.ProductoId == productId);
-
-            await Task.FromResult(_context.Remove<CarritoProducto>(cp));
+        public async Task DeleteProduct(CarritoProducto cartProduct)
+        {           
+            _context.CarritoProductoDb.Remove(cartProduct);
+            await _context.SaveChangesAsync();
         }
     }
 }

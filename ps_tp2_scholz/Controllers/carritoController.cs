@@ -17,29 +17,36 @@ namespace ps_tp2_scholz.Controllers
             _cartproductservices = cartproductservices;
         }
 
-        //4. TODO Agregar producto al carrito
+        //4.
         [HttpPost]
         public async Task<IActionResult> AddProductCart(CreateCartRequest request)
         {
             var cart = await _cartservices.ValidarCarrito(request);
             var result = await _cartproductservices.AddProductCart(request, cart);
-            return new JsonResult(result) { StatusCode = 201 }; 
+            if (result == null)
+            {
+                return new JsonResult(result) { StatusCode = 400 }; //TODO: msj?
+            }
+            return new JsonResult(result) { StatusCode = 201 };
         }
 
-        //5. TODO Modificar el carrito
+        //5. 
         [HttpPut]
         public async Task<IActionResult> UpdateCart(CreateCartRequest request)
         {
-            await _cartproductservices.UpdateCart(request);
+            var cart = await _cartservices.GetCartByClientId(request.ClienteId);
+
+            await _cartproductservices.UpdateCart(cart, request);
             return new JsonResult(new { }) { StatusCode = 201 };
         }
 
-        //6. TODO Eliminar producto del carrito
-        [HttpDelete]
+        //6.
+        [HttpDelete("{clientId},{productId}")]
         public async Task<IActionResult> DeleteProduct(int clientId, int productId)
         {
-            var result = await _cartproductservices.DeleteProduct(clientId, productId); 
-            return new JsonResult(result) { StatusCode = 204 };
+            var cart = _cartservices.GetCartByClientId(clientId);
+            await _cartproductservices.DeleteProduct(cart.Result, productId); 
+            return new JsonResult(new { mensaje = "Se ha eliminado el producto del carrito" }) { StatusCode = 200 };
         }
     }
 }

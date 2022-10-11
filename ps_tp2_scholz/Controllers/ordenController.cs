@@ -9,13 +9,14 @@ namespace ps_tp2_scholz.Controllers
     public class ordenController : ControllerBase
     {
         private readonly IOrderServices _services;
+        private readonly ICartProductServices _servicescp;
 
         public ordenController(IOrderServices services)
         {
             _services = services;
         }
 
-        //7. TODO create order
+        //7. TODO create order clientid
         [HttpPost("{id}")]
         public async Task<IActionResult> CreateOrder(int id)
         {

@@ -14,15 +14,15 @@ namespace ps_tp2_scholz.Controllers
             _services = services;
         }
 
-        [HttpPost] //2.
-        public async Task<IActionResult> FilterProduct(FilterProductRequest filter)
+        [HttpGet] //2. 
+        public async Task<IActionResult> FilterProduct([FromQuery] FilterProductRequest filter) 
         {
             var result = await _services.FilterProduct(filter);
             if (result == null)
             {
-                return new JsonResult(result) { StatusCode = 204 }; //TODO: 400(Peticion Incorrecta)?
+                return new JsonResult(result) { StatusCode = 204 }; //400(Peticion Incorrecta)
             }
-            return new JsonResult(result) {StatusCode = 206}; //TODO: 206(Contenido Parcial)? 
+            return new JsonResult(result) {StatusCode = 206}; //206(Contenido Parcial)
         }
 
         [HttpGet("{id}")] //3.
@@ -31,7 +31,7 @@ namespace ps_tp2_scholz.Controllers
             var result = await _services.GetProduct(id);
             if (result == null)
             {
-                return new JsonResult(result) {StatusCode = 204}; //TODO: 400(Peticion Incorrecta)?
+                return new JsonResult(result) { StatusCode = 204 }; //400(Peticion Incorrecta)
             }
             return new JsonResult(result) {StatusCode = 200}; 
         }

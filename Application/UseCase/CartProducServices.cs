@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Application.Models;
 using Domain.Entities;
+using System.ComponentModel.Design;
 
 namespace Application.UseCase
 {
@@ -16,8 +17,9 @@ namespace Application.UseCase
         }
 
         //4.
-        public async Task<CreateCartRequest> AddProductCart(CreateCartRequest request, Carrito cart)
+        public async Task<string> AddProductCart(CreateCartRequest request, Carrito cart)
         {
+            string message;
             var cp = new CarritoProducto
             {
                 CarritoId = cart.CarritoId,
@@ -25,30 +27,33 @@ namespace Application.UseCase
                 Cantidad = request.Cantidad
             };
 
-            //if Exists(cp)
-            //Cantidad++
-
-            await _command.AddProductCart(cp);
-
-            var r = new CreateCartRequest
+            ;
+            if (_query.Exists(cp).Result)
             {
-                ClienteId = cart.ClienteId,
-                ProductoId = cp.ProductoId,
-                Cantidad = cp.Cantidad
-            };
-            return r;
+                await _command.AddAmount(cp, request.Cantidad);
+                message = "Se han agregado mas unidades del producto. ";
+            }
+            else
+            {
+                await _command.InsertCP(cp);
+                message = "Se ha agregado un nuevo producto. ";
+
+            }
+            return message;
         }
 
-        //5.
-        public async Task UpdateCart(CreateCartRequest cart)
+        //5. 
+        public async Task UpdateCart(Carrito cart, CreateCartRequest req)
         {
-            await Task.Run(() => _command.UpdateCart(cart));
+            var cartProduct = _query.GetCartProduct(cart.CarritoId, req.ProductoId);
+            await Task.Run(() => _command.ChangeAmount(cartProduct.Result, req.Cantidad));
         }
 
         //6.
-        public async Task<Func<Task>> DeleteProduct(int clientId, int productId)
+        public async Task DeleteProduct(Carrito cart, int productId)
         {
-            return await Task.FromResult(() => _command.DeleteProduct(clientId, productId));
+            var cartProduct = _query.GetCartProduct(cart.CarritoId, productId);
+            await _command.DeleteProduct(cartProduct.Result);
         }
     }
 }

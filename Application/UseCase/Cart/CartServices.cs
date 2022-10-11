@@ -1,7 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Models;
 using Domain.Entities;
-using System.Net;
 
 namespace Application.UseCase.CartProduct
 {
@@ -18,7 +17,7 @@ namespace Application.UseCase.CartProduct
 
         public async Task<Carrito> ValidarCarrito(CreateCartRequest req)
         {
-            var cart = await _query.GetCarritoByClienteId(req.ClienteId);
+            var cart = await _query.GetCarritoByClienteId(req.ClienteId); //TODO cliente inexistente
             if (cart == null)
             {
                 cart = new Carrito
@@ -30,6 +29,11 @@ namespace Application.UseCase.CartProduct
                 await _command.InsertCart(cart);
             }
             return cart;
+        }
+
+        public async Task<Carrito> GetCartByClientId(int clientId)
+        {
+            return await _query.GetCarritoByClienteId(clientId); 
         }
 
         public async Task<Carrito> GetCart(int cartId)

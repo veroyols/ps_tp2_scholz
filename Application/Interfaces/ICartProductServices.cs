@@ -5,9 +5,9 @@ namespace Application.Interfaces
 {
     public interface ICartProductServices
     {
-        public Task<CreateCartRequest> AddProductCart(CreateCartRequest request, Carrito cart);
-        public Task UpdateCart(CreateCartRequest cart);
-        public Task<Func<Task>> DeleteProduct(int clientId, int productId);
+        public Task<string> AddProductCart(CreateCartRequest request, Carrito cart);
+        public Task UpdateCart(Carrito cart, CreateCartRequest req);
+        public Task DeleteProduct(Carrito cart, int productId);
 
     }
 }
