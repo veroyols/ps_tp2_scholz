@@ -43,16 +43,16 @@ namespace Infrastructure.Persistence
                 entity.Property(p => p.ProductoId).ValueGeneratedOnAdd();
                 entity.Property(p => p.Precio).HasColumnType("decimal(15, 2)");
                 entity.HasData(
-                                    new Producto
-                                    {
-                                        ProductoId = 1,
-                                        Nombre = "Remera",
-                                        Descripcion = "Remera de algodon lisa, varios colores.",
-                                        Marca = "Simpl",
-                                        Codigo = "ps2c2022-01",
-                                        Precio = 3000.00M,
-                                        Image = "https://drive.google.com/file/d/1AWEbI7NFytjQr0PcRNfqGjlWLDcW1BDr/view?usp=sharing"
-                                    });
+                    new Producto
+                    {
+                        ProductoId = 1,
+                        Nombre = "Remera",
+                        Descripcion = "Remera de algodon lisa, varios colores.",
+                        Marca = "Simpl",
+                        Codigo = "ps2c2022-01",
+                        Precio = 3000.00M,
+                        Image = "https://drive.google.com/file/d/1AWEbI7NFytjQr0PcRNfqGjlWLDcW1BDr/view?usp=sharing"
+                    });
                 entity.HasData(
                     new Producto
                     {
@@ -68,7 +68,7 @@ namespace Infrastructure.Persistence
                     new Producto
                     {
                         ProductoId = 3,
-                        Nombre = "Buzo Canguro",
+                        Nombre = "Buzo",
                         Descripcion = "Canguro de friza liso, varios colores.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-03",
@@ -90,8 +90,8 @@ namespace Infrastructure.Persistence
                     new Producto
                     {
                         ProductoId = 5,
-                        Nombre = "Musculosa",
-                        Descripcion = "Musculosa de algodon lisa, varios colores.",
+                        Nombre = "Remera",
+                        Descripcion = "Remera sin manga, musculosa, de algodon, lisa, varios colores.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-05",
                         Precio = 2700.00M,
@@ -101,7 +101,7 @@ namespace Infrastructure.Persistence
                     new Producto
                     {
                         ProductoId = 6,
-                        Nombre = "Pantalon Jogging",
+                        Nombre = "Pantalon",
                         Descripcion = "Pantalon jogging de friza.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-06",
@@ -112,7 +112,7 @@ namespace Infrastructure.Persistence
                     new Producto
                     {
                         ProductoId = 7,
-                        Nombre = "Campera Jean",
+                        Nombre = "Campera",
                         Descripcion = "Campera de jean corta.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-07",
@@ -123,7 +123,7 @@ namespace Infrastructure.Persistence
                     new Producto
                     {
                         ProductoId = 8,
-                        Nombre = "Pantalon Jean",
+                        Nombre = "Pantalon",
                         Descripcion = "Pantalon de jean claro.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-08",
@@ -134,7 +134,7 @@ namespace Infrastructure.Persistence
                     new Producto
                     {
                         ProductoId = 9,
-                        Nombre = "Sweater Bremer Negro",
+                        Nombre = "Sweater",
                         Descripcion = "Sweater Bremer Negro.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-09",
@@ -145,8 +145,8 @@ namespace Infrastructure.Persistence
                     new Producto
                     {
                         ProductoId = 10,
-                        Nombre = "Camiseta",
-                        Descripcion = "Camiseta algodon, varios colores.",
+                        Nombre = "Remera",
+                        Descripcion = "Remera manga larga, algodon, varios colores.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-10",
                         Precio = 5200.00M,

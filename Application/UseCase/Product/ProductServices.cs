@@ -34,5 +34,10 @@ namespace Application.UseCase.Product
             var list = await Task.Run(() => _query.GetListProduct());
             return list;
         }
+        public async Task<decimal> GetPrecio(int productoId)
+        {
+            return await _query.GetPrecio(productoId);
+        }
+
     }
 }

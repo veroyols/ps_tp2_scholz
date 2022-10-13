@@ -8,6 +8,6 @@ namespace Application.Interfaces
         public Task<List<Producto>> GetListProduct();
         public Task<Producto> GetProduct(int productId);
         public Task<List<Producto>> GetListProduct(FilterProductRequest filter);
-
+        public Task<decimal> GetPrecio(int productoId);
     }
 }

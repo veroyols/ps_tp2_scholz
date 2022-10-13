@@ -17,7 +17,7 @@ namespace Application.UseCase.Client
         //1.
         public async Task<CreateClientResponse> CreateClient(CreateClientRequest request)
         {
-            var cliente = new Cliente //TODO Comprobar que no exista en la bd
+            var cliente = new Cliente
             {
                 DNI = request.dni,
                 Nombre = request.name,

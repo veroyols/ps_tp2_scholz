@@ -1,6 +1,8 @@
 ﻿using Application.Interfaces;
 using Application.Models;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 
 namespace ps_tp2_scholz.Controllers
 {
@@ -23,10 +25,6 @@ namespace ps_tp2_scholz.Controllers
         {
             var cart = await _cartservices.ValidarCarrito(request);
             var result = await _cartproductservices.AddProductCart(request, cart);
-            if (result == null)
-            {
-                return new JsonResult(result) { StatusCode = 400 }; //TODO: msj?
-            }
             return new JsonResult(result) { StatusCode = 201 };
         }
 
@@ -34,19 +32,26 @@ namespace ps_tp2_scholz.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateCart(CreateCartRequest request)
         {
-            var cart = await _cartservices.GetCartByClientId(request.ClienteId);
-
-            await _cartproductservices.UpdateCart(cart, request);
-            return new JsonResult(new { }) { StatusCode = 201 };
+            Carrito cart;
+            try
+            {
+                cart = await _cartservices.GetCartByClientId(request.clientId);
+                await _cartproductservices.UpdateCart(cart, request);
+                return new JsonResult("Modificado") { StatusCode = 201 };
+            }
+            catch (Exception)
+            {
+                return new JsonResult("El id de cliente no existe") { StatusCode = 201 };
+            }
         }
 
         //6.
-        [HttpDelete("{clientId},{productId}")]
+        [HttpDelete("{clientId}/{productId}")]
         public async Task<IActionResult> DeleteProduct(int clientId, int productId)
         {
             var cart = _cartservices.GetCartByClientId(clientId);
             await _cartproductservices.DeleteProduct(cart.Result, productId); 
-            return new JsonResult(new { mensaje = "Se ha eliminado el producto del carrito" }) { StatusCode = 200 };
+            return new JsonResult("Eliminado") { StatusCode = 200 };
         }
     }
 }

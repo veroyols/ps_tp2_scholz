@@ -23,14 +23,14 @@ namespace Application.UseCase
             var cp = new CarritoProducto
             {
                 CarritoId = cart.CarritoId,
-                ProductoId = request.ProductoId,
-                Cantidad = request.Cantidad
+                ProductoId = request.productId,
+                Cantidad = request.amount
             };
 
             ;
             if (_query.Exists(cp).Result)
             {
-                await _command.AddAmount(cp, request.Cantidad);
+                await _command.AddAmount(cp, request.amount);
                 message = "Se han agregado mas unidades del producto. ";
             }
             else
@@ -45,8 +45,8 @@ namespace Application.UseCase
         //5. 
         public async Task UpdateCart(Carrito cart, CreateCartRequest req)
         {
-            var cartProduct = _query.GetCartProduct(cart.CarritoId, req.ProductoId);
-            await Task.Run(() => _command.ChangeAmount(cartProduct.Result, req.Cantidad));
+            var cartProduct = _query.GetCartProduct(cart.CarritoId, req.productId);
+            await Task.Run(() => _command.ChangeAmount(cartProduct.Result, req.amount));
         }
 
         //6.
@@ -54,6 +54,21 @@ namespace Application.UseCase
         {
             var cartProduct = _query.GetCartProduct(cart.CarritoId, productId);
             await _command.DeleteProduct(cartProduct.Result);
+        }
+
+        public async Task<List<ItemCartProduct>> GetCartProduct(Guid carritoId)
+        {
+            var list = await _query.GetCartProduct(carritoId);
+            var list2 = new List<ItemCartProduct>();
+            foreach (var cp in list)
+            {
+                list2.Add(new ItemCartProduct
+                {
+                    productoId = cp.ProductoId,
+                    cantidad = cp.Cantidad,
+                });
+            }
+            return list2;
         }
     }
 }

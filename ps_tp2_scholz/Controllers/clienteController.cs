@@ -1,6 +1,8 @@
 ﻿using Application.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
+using System.Net;
 
 namespace ps_tp2_scholz.Controllers
 {
@@ -14,12 +16,13 @@ namespace ps_tp2_scholz.Controllers
             _services = services;
         }
         
-        //1.
+        //1. TODO Validar que el dni no exista en la bd
         [HttpPost] 
         public async Task<IActionResult> CreateClient(CreateClientRequest request)
         {
             var result = await _services.CreateClient(request);
-            return new JsonResult(result) {StatusCode = 201};
+            return new JsonResult(result)
+            { StatusCode = 201 };
         }
 
         [HttpGet] 

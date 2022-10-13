@@ -2,6 +2,7 @@
 using Application.Models;
 using Domain.Entities;
 using Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.cqrs_Query
 {
@@ -17,7 +18,7 @@ namespace Infrastructure.cqrs_Query
         //2.
         public async Task<List<Producto>> GetListProduct(FilterProductRequest filter)
         {
-            if (filter.orderBy) //TODO
+            if (filter.orderBy) //TODO ASC DESC
             {
                 var q1 = await Task.Run(() =>
                     from p in _context.Set<Producto>()
@@ -45,6 +46,12 @@ namespace Infrastructure.cqrs_Query
         {
             var list = await Task.Run(() => _context.ProductoDb.ToList<Producto>());
             return list;
+        }
+
+        public async Task<decimal> GetPrecio(int productoId)
+        {
+            var p = await _context.ProductoDb.FirstOrDefaultAsync(x => x.ProductoId == productoId);
+            return p.Precio;
         }
     }
 }

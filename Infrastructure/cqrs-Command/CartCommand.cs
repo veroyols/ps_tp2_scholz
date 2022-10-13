@@ -25,7 +25,7 @@ namespace Infrastructure.cqrs_Command
             var c = _context.CarritoDb.FirstOrDefault(x => x.CarritoId == cartId);
             if (c != null)
             {
-                await Task.FromResult(c.Estado = false);
+                await Task.Run(() => c.Estado = false);
             }
         }
     }

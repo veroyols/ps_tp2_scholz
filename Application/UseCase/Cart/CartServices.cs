@@ -17,13 +17,22 @@ namespace Application.UseCase.CartProduct
 
         public async Task<Carrito> ValidarCarrito(CreateCartRequest req)
         {
-            var cart = await _query.GetCarritoByClienteId(req.ClienteId); //TODO cliente inexistente
+            Carrito cart;
+            try
+            {
+                cart = await _query.GetCarritoByClienteId(req.clientId); 
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
             if (cart == null)
             {
                 cart = new Carrito
                 {
                     CarritoId = Guid.NewGuid(),
-                    ClienteId = req.ClienteId,
+                    ClienteId = req.clientId,
                     Estado = true
                 };
                 await _command.InsertCart(cart);
@@ -35,22 +44,21 @@ namespace Application.UseCase.CartProduct
         {
             return await _query.GetCarritoByClienteId(clientId); 
         }
-
-        public async Task<Carrito> GetCart(int cartId)
-        {
-            var c = await Task.Run(() => _query.GetCart(cartId));
-            return c;
-        }
-
-        public async Task<List<Carrito>> GetCarts()
-        {
-            var list = await Task.Run(() => _query.GetListCart());
-            return list;
-        }
-
         public async Task StatusFalse(Guid cartId)
         {
             await Task.FromResult(_command.StatusFalse(cartId));
         }
+
+        //public async Task<Carrito> GetCart(int cartId)
+        //{
+        //    var c = await Task.Run(() => _query.GetCart(cartId));
+        //    return c;
+        //}
+
+        //public async Task<List<Carrito>> GetCarts()
+        //{
+        //    var list = await Task.Run(() => _query.GetListCart());
+        //    return list;
+        //}
     }
 }

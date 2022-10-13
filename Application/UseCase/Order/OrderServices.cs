@@ -1,4 +1,6 @@
 ﻿using Application.Interfaces;
+using Application.Models;
+using Domain.Entities;
 
 namespace Application.UseCase.Order
 {
@@ -14,12 +16,21 @@ namespace Application.UseCase.Order
         }
 
         //7.
-        public Task<Domain.Entities.Orden> CreateOrder(int clientId)
+        public async Task<Orden> CreateOrder(Guid cartId, int clientId, decimal total)
         {
-            throw new NotImplementedException();
+            Orden orden = new Orden
+            {
+                OrdenId = Guid.NewGuid(),
+                CarritoId = cartId,
+                Total = total,
+                Fecha = DateTime.Now,
+            };
+            await _command.InsertOrder(orden);
+            return orden;
         }
+
         //8.
-        public Task<List<Domain.Entities.Orden>> GetOrders()
+        public Task<List<Orden>> GetOrders(GetOrdersRequest orderRequest)
         {
             throw new NotImplementedException();
         }

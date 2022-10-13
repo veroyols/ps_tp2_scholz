@@ -28,7 +28,7 @@ namespace Infrastructure.cqrs_Query
         {
             var cart = await _context.CarritoDb
                 .Include(c => c.Cliente)
-                .FirstOrDefaultAsync(x => x.ClienteId == clientId && x.Estado == true);
+                .FirstOrDefaultAsync(x => x.ClienteId == clientId && x.Estado);
             return cart; 
         }
     }

@@ -7,6 +7,6 @@ namespace Application.Interfaces
     {
         public Task<bool> Exists(CarritoProducto cartProd);
         public Task<CarritoProducto> GetCartProduct(Guid cart, int productId);
-
+        public Task<List<CarritoProducto>> GetCartProduct(Guid carritoId);
     }
 }

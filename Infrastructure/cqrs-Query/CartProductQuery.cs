@@ -23,12 +23,20 @@ namespace Infrastructure.cqrs_Query
             return cp;
         }
 
-
         public async Task<bool> Exists(CarritoProducto cartProd)
         {
             var cartProdBd = await _context.CarritoProductoDb
                 .AnyAsync(x => x.CarritoId == cartProd.CarritoId && x.ProductoId == cartProd.ProductoId);
             return cartProdBd;
+        }
+
+        public async Task<List<CarritoProducto>> GetCartProduct(Guid carritoId)
+        {
+            var query = await Task.Run(() =>
+                from cp in _context.CarritoProductoDb
+                where cp.CarritoId == carritoId
+                select cp);
+            return query.ToList();
         }
     }
 }
