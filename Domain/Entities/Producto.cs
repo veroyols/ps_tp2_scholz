@@ -5,15 +5,15 @@ namespace Domain.Entities
     public class Producto
     {
         [Key]
-        public int ProductoId { get; set; } //pk
-        public string Nombre { get; set; } //nvarchar(max)
-        public string Descripcion { get; set; } //nvarchar(max)
+        public int ProductoId { get; set; } 
+        public string Nombre { get; set; } 
+        public string Descripcion { get; set; } 
         [MaxLength(25)]
-        public string Marca { get; set; } //nvarchar(25)
+        public string Marca { get; set; } 
         [MaxLength(25)]
-        public string Codigo { get; set; } //nvarchar(25)
-        public decimal Precio { get; set; } //.HasColumnType("decimal(15, 2)");
-        public string Image { get; set; } //nvarchar(max)
+        public string Codigo { get; set; }
+        public decimal Precio { get; set; } 
+        public string Image { get; set; } 
 
         //Relaciones
         public IList<CarritoProducto> CarritoProducto { get; set; }

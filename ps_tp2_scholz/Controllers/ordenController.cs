@@ -1,8 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Models;
-using Application.UseCase.CartProduct;
 using Domain.Entities;
-using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ps_tp2_scholz.Controllers
@@ -43,7 +41,7 @@ namespace ps_tp2_scholz.Controllers
 
         //8.
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] GetOrdersRequest orderRequest)// TODO: get orders
+        public async Task<IActionResult> GetAll([FromQuery] GetOrdersRequest orderRequest)
         {
             var result = await _services.GetOrders(orderRequest);
             return new JsonResult(result) { StatusCode = 200 };

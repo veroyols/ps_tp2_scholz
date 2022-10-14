@@ -1,10 +1,10 @@
-﻿using Domain.Entities;
+﻿using Application.Models;
+using Domain.Entities;
 
 namespace Application.Interfaces
 {
     public interface IOrderQuery
     {
-        List<Orden> GetListOrder();
-        Orden GetOrder(int orderId);
+        public Task<List<Orden>> GetListOrder(GetOrdersRequest orderRequest);
     }
 }

@@ -1,13 +1,14 @@
 ﻿ (TP 2) Entrega de Backend con la lógica de negocios
 1.[POST]>/api/clientes
-	BODY
+	BODY 
 	{
-	"dni": "123456789",
+	"dni": "123456789", //Status Code 409
 	"name": "Señor",
 	"lastname": "X",
 	"address": "Calle falsa 123",
 	"phoneNumber": "123456789"
 	}
+	
 2.[OPTIONS]>/api/productos 
 	QueryParams
 	{

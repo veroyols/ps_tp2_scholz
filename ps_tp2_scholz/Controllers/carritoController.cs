@@ -2,7 +2,6 @@
 using Application.Models;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.CompilerServices;
 
 namespace ps_tp2_scholz.Controllers
 {

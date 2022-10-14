@@ -1,8 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Models;
-using System.Net;
 
 namespace ps_tp2_scholz.Controllers
 {

@@ -23,7 +23,6 @@ builder.Services.AddScoped<IClientCommand, ClientCommand>();
 
 builder.Services.AddScoped<IProductServices, ProductServices>();
 builder.Services.AddScoped<IProductQuery, ProductQuery>();
-builder.Services.AddScoped<IProductCommand, ProductCommand>();
 
 builder.Services.AddScoped<IOrderServices, OrderServices>();
 builder.Services.AddScoped<IOrderQuery, OrderQuery>();

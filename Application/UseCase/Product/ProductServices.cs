@@ -6,12 +6,10 @@ namespace Application.UseCase.Product
 {
     public class ProductServices : IProductServices
     {
-        private readonly IProductCommand _command;
         private readonly IProductQuery _query;
 
-        public ProductServices(IProductCommand command, IProductQuery query)
+        public ProductServices(IProductQuery query)
         {
-            _command = command;
             _query = query;
         }
 
@@ -29,15 +27,14 @@ namespace Application.UseCase.Product
             return p;
         }
         
-        public async Task<List<Producto>> GetProducts()
+        public async Task<List<Producto>> GetProducts(bool orderBy)
         {
-            var list = await Task.Run(() => _query.GetListProduct());
+            var list = await Task.Run(() => _query.GetListProduct(orderBy));
             return list;
         }
         public async Task<decimal> GetPrecio(int productoId)
         {
             return await _query.GetPrecio(productoId);
         }
-
     }
 }

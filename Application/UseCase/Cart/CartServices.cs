@@ -48,17 +48,5 @@ namespace Application.UseCase.CartProduct
         {
             await Task.FromResult(_command.StatusFalse(cartId));
         }
-
-        //public async Task<Carrito> GetCart(int cartId)
-        //{
-        //    var c = await Task.Run(() => _query.GetCart(cartId));
-        //    return c;
-        //}
-
-        //public async Task<List<Carrito>> GetCarts()
-        //{
-        //    var list = await Task.Run(() => _query.GetListCart());
-        //    return list;
-        //}
     }
 }

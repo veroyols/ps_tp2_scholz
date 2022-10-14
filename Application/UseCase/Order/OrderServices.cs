@@ -30,9 +30,14 @@ namespace Application.UseCase.Order
         }
 
         //8.
-        public Task<List<Orden>> GetOrders(GetOrdersRequest orderRequest)
+        public async Task<List<Orden>> GetOrders(GetOrdersRequest orderRequest)
         {
-            throw new NotImplementedException();
+            if (orderRequest.to == DateTime.MinValue)
+            {
+                orderRequest.to = DateTime.Now;
+            }
+            var list = await Task.FromResult(_query.GetListOrder(orderRequest));
+            return list.Result;
         }
     }
 }

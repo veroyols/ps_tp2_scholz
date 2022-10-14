@@ -15,15 +15,30 @@ namespace ps_tp2_scholz.Controllers
         }
 
         [HttpGet] //2. 
-        public async Task<IActionResult> FilterProduct([FromQuery] FilterProductRequest filter) 
+        public async Task<IActionResult> FilterProduct([FromQuery] bool orderBy, [FromQuery] string productName = "all")
         {
+            if (orderBy == null)
+            {
+                orderBy = false;
+            }
+            if (productName == "all")
+            {
+                var list = await _services.GetProducts(orderBy);
+                return new JsonResult(list) { StatusCode = 206 };
+            }
+            FilterProductRequest filter = new FilterProductRequest
+            {
+                orderBy = orderBy,
+                productName = productName
+            };
             var result = await _services.FilterProduct(filter);
             if (result == null)
             {
-                return new JsonResult(result) { StatusCode = 204 }; //400(Peticion Incorrecta)
+                return new JsonResult(result) { StatusCode = 400 }; //400(Peticion Incorrecta)
             }
-            return new JsonResult(result) {StatusCode = 206}; //206(Contenido Parcial)
+            return new JsonResult(result) { StatusCode = 206 }; //206(Contenido Parcial)
         }
+
 
         [HttpGet("{id}")] //3.
         public async Task<IActionResult> GetProductById(int id)
@@ -31,7 +46,7 @@ namespace ps_tp2_scholz.Controllers
             var result = await _services.GetProduct(id);
             if (result == null)
             {
-                return new JsonResult(result) { StatusCode = 204 }; //400(Peticion Incorrecta)
+                return new JsonResult(result) { StatusCode = 400 }; 
             }
             return new JsonResult(result) {StatusCode = 200}; 
         }

@@ -9,8 +9,5 @@ namespace Application.Interfaces
         public Task<Carrito> GetCartByClientId(int clientId);
         public Task StatusFalse(Guid cartId);
         
-        //public Task<List<Carrito>> GetCarts();
-        //public Task<Carrito> GetCart(int clientId);
-
     }
 }

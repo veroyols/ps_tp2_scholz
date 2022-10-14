@@ -5,7 +5,7 @@ namespace Application.Interfaces
 {
     public interface IOrderServices
     {
-        Task<Orden> CreateOrder(Guid cartId, int clientId, decimal total);
-        Task<List<Orden>> GetOrders(GetOrdersRequest orderRequest);
+        public Task<Orden> CreateOrder(Guid cartId, int clientId, decimal total);
+        public Task<List<Orden>> GetOrders(GetOrdersRequest orderRequest);
     }
 }

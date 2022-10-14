@@ -1,8 +1,6 @@
 ﻿using Application.Interfaces;
-using Application.Models;
 using Domain.Entities;
 using Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.cqrs_Command
 {

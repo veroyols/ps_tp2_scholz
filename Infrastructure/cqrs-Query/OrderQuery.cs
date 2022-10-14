@@ -1,18 +1,27 @@
 ﻿using Application.Interfaces;
+using Application.Models;
 using Domain.Entities;
+using Infrastructure.Persistence;
 
 namespace Infrastructure.cqrs_Query
 {
     public class OrderQuery : IOrderQuery
     {
-        public Orden GetOrder(int orderId)
+        private readonly AppDbContext _context;
+
+        public OrderQuery(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public List<Orden> GetListOrder()
+        public async Task<List<Orden>> GetListOrder(GetOrdersRequest orderRequest)
         {
-            throw new NotImplementedException();
+            var query = await Task.Run(() =>
+                from o in _context.OrdenDb
+                where o.Fecha > orderRequest.@from
+                where o.Fecha < orderRequest.@to
+                select o);
+            return query.ToList();
         }
     }
 }

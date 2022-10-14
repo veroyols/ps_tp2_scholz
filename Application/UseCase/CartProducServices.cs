@@ -1,7 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Models;
 using Domain.Entities;
-using System.ComponentModel.Design;
 
 namespace Application.UseCase
 {

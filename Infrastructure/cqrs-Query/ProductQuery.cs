@@ -42,10 +42,21 @@ namespace Infrastructure.cqrs_Query
             return p;
         }
 
-        public async Task<List<Producto>> GetListProduct()
+        public async Task<List<Producto>> GetListProduct(bool orderBy)
         {
-            var list = await Task.Run(() => _context.ProductoDb.ToList<Producto>());
-            return list;
+            if (orderBy) 
+            {
+                var q1 = await Task.Run(() =>
+                    from p in _context.Set<Producto>()
+                    orderby p.Precio ascending
+                    select p);
+                return q1.ToList();
+            }
+            var query = await Task.Run(() =>
+                from p in _context.Set<Producto>()
+                orderby p.Precio descending
+                select p);
+            return query.ToList();
         }
 
         public async Task<decimal> GetPrecio(int productoId)
