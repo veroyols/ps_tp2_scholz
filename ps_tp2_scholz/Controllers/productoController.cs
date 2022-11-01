@@ -39,7 +39,6 @@ namespace ps_tp2_scholz.Controllers
             return new JsonResult(result) { StatusCode = 206 }; //206(Contenido Parcial)
         }
 
-
         [HttpGet("{id}")] //3.
         public async Task<IActionResult> GetProductById(int id)
         {
